@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
-{ public float moveSpeed = 5.0f;
+{
+    public float moveSpeed = 10.0f;
+    public float maxMoveSpeed = 20f;
     public float jumpForce = 5.0f;
     public float mouseSensitivity = 2.0f;
 
     private Rigidbody rb;
     private float horizontalInput;
     private float verticalInput;
-    private bool isGrounded = true;
     private float mouseX;
     private float mouseY;
+
+    public Image speedImage;
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,13 +36,15 @@ public class Controller : MonoBehaviour
         //mouseY -= Input.GetAxis("Mouse Y") * mouseSensitivity;
         //mouseY = Mathf.Clamp(mouseY, -90.0f, 90.0f); // Limit vertical rotation angle
 
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, mouseX, 0); // Rotate player view with mouse
+        transform.eulerAngles = new Vector3(4.63f, mouseX, 0); // Rotate player view with mouse
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGrounded = false;
-        }
+      
+
+        speedImage.fillAmount = Mathf.Lerp(speedImage.fillAmount, moveSpeed / maxMoveSpeed, 0.02f);
+        speedImage.color = Color.Lerp(Color.red , Color.green, (moveSpeed / maxMoveSpeed) );
+        transform.position = new Vector3(transform.position.x , -5.20f , transform.position.z); 
+
+
     }
 
     // FixedUpdate is called every fixed framerate frame
@@ -49,12 +56,18 @@ public class Controller : MonoBehaviour
         rb.MovePosition(transform.position + moveDirection);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("SpeedPotion"))
         {
-            isGrounded = true;
+            moveSpeed+=5;
+            Invoke(nameof(DecreaseSpeed),5f);
+            Destroy(other.gameObject);
         }
+    }
+
+    void DecreaseSpeed(){
+         moveSpeed-=5;
     }
 }
 
