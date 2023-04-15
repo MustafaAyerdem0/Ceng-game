@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - SpeedPotion
+  - FinishLine
+  - CheckPoint
   layers:
   - Default
   - TransparentFX

@@ -18,6 +18,9 @@ public class Controller : MonoBehaviour
 
     public Image speedImage;
 
+    public GameObject[] CheckPoints;
+    public int currentCp;
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +32,8 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+         if (GameManager.instance.startGame)
+        {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
@@ -43,6 +48,7 @@ public class Controller : MonoBehaviour
         speedImage.fillAmount = Mathf.Lerp(speedImage.fillAmount, moveSpeed / maxMoveSpeed, 0.02f);
         speedImage.color = Color.Lerp(Color.red , Color.green, (moveSpeed / maxMoveSpeed) );
         transform.position = new Vector3(transform.position.x , -5.20f , transform.position.z); 
+        }
 
 
     }
@@ -50,10 +56,13 @@ public class Controller : MonoBehaviour
     // FixedUpdate is called every fixed framerate frame
     void FixedUpdate()
     {
+         if (GameManager.instance.startGame)
+        {
         Vector3 moveDirection = (transform.forward * verticalInput) + (transform.right * horizontalInput);
         moveDirection = moveDirection.normalized * moveSpeed * Time.deltaTime;
 
         rb.MovePosition(transform.position + moveDirection);
+        }
     }
 
 
@@ -63,6 +72,15 @@ public class Controller : MonoBehaviour
             moveSpeed+=5;
             Invoke(nameof(DecreaseSpeed),5f);
             Destroy(other.gameObject);
+        }
+
+        if (other.CompareTag("CheckPoint"))
+        {
+            CheckPoints[currentCp].SetActive(false);
+            currentCp++;
+            if(currentCp<CheckPoints.Length);
+                CheckPoints[currentCp].SetActive(true);
+
         }
     }
 
