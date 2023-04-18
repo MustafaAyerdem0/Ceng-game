@@ -78,10 +78,37 @@ public class Controller : MonoBehaviour
         {
             CheckPoints[currentCp].SetActive(false);
             currentCp++;
-            if(currentCp<CheckPoints.Length);
+            if(currentCp<CheckPoints.Length)
                 CheckPoints[currentCp].SetActive(true);
 
         }
+
+        if (other.CompareTag("FinishLine") && currentCp ==10)
+        {
+            if(GameManager.instance.PlayerPosition==1)
+                GameManager.instance.winPanel.SetActive(true);
+            else
+                GameManager.instance.LosePanel.SetActive(true);
+
+            GameManager.instance.retryGameButton.SetActive(true);
+            GameManager.instance.finishGame = true;
+            GameManager.instance.startGame = false;  
+            Destroy(GetComponent<Collider>()); 
+            Destroy(GetComponent<Rigidbody>()); 
+             Cursor.lockState = CursorLockMode.None;
+
+            
+            Invoke(nameof(CloseScript),0.5f);
+            
+
+               
+            
+        }
+    }
+
+    void CloseScript(){
+        enabled = false;
+
     }
 
     void DecreaseSpeed(){
