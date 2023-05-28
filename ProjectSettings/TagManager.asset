@@ -7,6 +7,7 @@ TagManager:
   - SpeedPotion
   - FinishLine
   - CheckPoint
+  - EnergyPotion
   layers:
   - Default
   - TransparentFX

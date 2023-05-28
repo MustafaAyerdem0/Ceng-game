@@ -6,6 +6,11 @@ public class Boat : MonoBehaviour
 {
     public GameObject followPlayer;
     public float degisken;
+
+    public float distanceX;
+    public float distanceZ;
+
+    public float lerpSpeed;
     void Start()
     {
         
@@ -14,7 +19,7 @@ public class Boat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, new Vector3(followPlayer.transform.position.x,transform.position.y,followPlayer.transform.position.z-60f),0.005f);
+        transform.position = Vector3.Lerp(transform.position, new Vector3(followPlayer.transform.position.x + distanceX,transform.position.y,followPlayer.transform.position.z -distanceZ),lerpSpeed);
         //transform.LookAt(followPlayer.traposition)
         transform.rotation =  Quaternion.Euler
         (transform.eulerAngles.x ,
