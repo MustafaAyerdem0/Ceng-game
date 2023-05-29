@@ -6,9 +6,13 @@ public class AiController : MonoBehaviour
 {
     public PathCreator pathCreator;
 
-    public float speed = 5;
+    public float speed;
     float distanceTravelled;
     bool isFinish;
+
+    void Start(){
+        speed= MenuManager.instance.difficult;
+    }
     void Update()
     {
         if (GameManager.instance.startGame && !isFinish)

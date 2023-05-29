@@ -67877,8 +67877,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followPlayer: {fileID: 1907325295001560928}
   degisken: 0
-  distanceX: 30.5
-  distanceZ: 10.3
+  distanceX: 52.25
+  distanceZ: -5.26
   lerpSpeed: 0.0015
 --- !u!4 &1540140544 stripped
 Transform:

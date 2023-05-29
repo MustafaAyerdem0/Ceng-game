@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Controller : MonoBehaviour
 {
@@ -115,12 +116,19 @@ public class Controller : MonoBehaviour
 
         if (other.CompareTag("FinishLine") && currentCp == 10)
         {
-            if (GameManager.instance.PlayerPosition == 1)
-                GameManager.instance.winPanel.SetActive(true);
-            else
-                GameManager.instance.LosePanel.SetActive(true);
+            if (GameManager.instance.PlayerPosition == 1){
 
-            GameManager.instance.retryGameButton.SetActive(true);
+                 GameManager.instance.winPanel.SetActive(true);
+                 MenuManager.instance.AddMoney(100);
+            }
+               
+            else{
+                GameManager.instance.LosePanel.SetActive(true);
+                MenuManager.instance.AddMoney(30);
+            }
+                
+
+            //GameManager.instance.retryGameButton.SetActive(true);
             GameManager.instance.finishGame = true;
             GameManager.instance.startGame = false;
             Destroy(GetComponent<Collider>());
@@ -129,6 +137,7 @@ public class Controller : MonoBehaviour
 
 
             Invoke(nameof(CloseScript), 0.5f);
+            Invoke(nameof(toMainMenu), 3f);
 
 
 
@@ -136,6 +145,10 @@ public class Controller : MonoBehaviour
         }
     }
 
+    void toMainMenu(){
+        Cursor.lockState = CursorLockMode.None;
+        SceneManager.LoadScene(0);
+    }
     void CloseScript()
     {
         enabled = false;
