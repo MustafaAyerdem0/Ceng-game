@@ -1062,7 +1062,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ef50189d8d9380b4b87a734fb1790a39, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6bff04f2d17430248965b67146eea1ef, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1871,6 +1871,7 @@ MonoBehaviour:
   settingUi: {fileID: 1609368800}
   money: 0
   moneyText: {fileID: 972212487}
+  difficult: 0
 --- !u!4 &1143348923
 Transform:
   m_ObjectHideFlags: 0
@@ -2342,7 +2343,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Difficulty (Easy)
+  m_text: Difficulty (Normal)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
