@@ -30,6 +30,10 @@ public class Controller : MonoBehaviour
 
     int diveCount;
 
+    public AudioSource hurraySound;
+
+    public GameObject[] fireWorks;
+
 
     // Start is called before the first frame update
     void Start()
@@ -120,6 +124,11 @@ public class Controller : MonoBehaviour
 
                  GameManager.instance.winPanel.SetActive(true);
                  MenuManager.instance.AddMoney(100);
+                 hurraySound.Play();
+                 foreach (var item in fireWorks)
+                 {
+                    item.SetActive(true);
+                 }
             }
                
             else{
@@ -137,7 +146,7 @@ public class Controller : MonoBehaviour
 
 
             Invoke(nameof(CloseScript), 0.5f);
-            Invoke(nameof(toMainMenu), 3f);
+            Invoke(nameof(toMainMenu), 5f);
 
 
 
